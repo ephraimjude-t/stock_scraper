@@ -13,12 +13,6 @@
             "percent_change": "21.07 +1.94 (+10.14%)"
         },
         {
-            "symbol": "DSDVY",
-            "price": "DSV A/S",
-            "change": "",
-            "percent_change": "94.88 +7.95 (+9.15%)"
-        },
-        {
             "symbol": "PIII",
             "price": "P3 Health Partners Inc.",
             "change": "",
@@ -49,22 +43,10 @@
             "percent_change": "98.40 +5.78 (+6.24%)"
         },
         {
-            "symbol": "TGOPY",
-            "price": "3i Group plc",
-            "change": "",
-            "percent_change": "27.63 +1.59 (+6.11%)"
-        },
-        {
             "symbol": "ADMA",
             "price": "ADMA Biologics, Inc.",
             "change": "",
             "percent_change": "22.15 +1.24 (+5.93%)"
-        },
-        {
-            "symbol": "DNZOY",
-            "price": "DENSO Corporation",
-            "change": "",
-            "percent_change": "12.30 +0.68 (+5.85%)"
         },
         {
             "symbol": "UAA",
@@ -97,12 +79,6 @@
             "percent_change": "17.00 +0.85 (+5.26%)"
         },
         {
-            "symbol": "CODYY",
-            "price": "Compagnie de Saint-Gobain S.A.",
-            "change": "",
-            "percent_change": "20.32 +1.01 (+5.23%)"
-        },
-        {
             "symbol": "HPE",
             "price": "Hewlett Packard Enterprise Company",
             "change": "",
@@ -127,12 +103,6 @@
             "percent_change": "976.28 +45.00 (+4.83%)"
         },
         {
-            "symbol": "RCRUY",
-            "price": "Recruit Holdings Co., Ltd.",
-            "change": "",
-            "percent_change": "10.64 +0.48 (+4.72%)"
-        },
-        {
             "symbol": "TIGO",
             "price": "Millicom International Cellular S.A.",
             "change": "",
@@ -149,6 +119,36 @@
             "price": "Scholar Rock Holding Corporation",
             "change": "",
             "percent_change": "30.22 +1.29 (+4.46%)"
+        },
+        {
+            "symbol": "CVNA",
+            "price": "Carvana Co.",
+            "change": "",
+            "percent_change": "213.81 +9.08 (+4.44%)"
+        },
+        {
+            "symbol": "STRL",
+            "price": "Sterling Infrastructure, Inc.",
+            "change": "",
+            "percent_change": "141.00 +5.77 (+4.27%)"
+        },
+        {
+            "symbol": "PTGX",
+            "price": "Protagonist Therapeutics, Inc.",
+            "change": "",
+            "percent_change": "46.95 +1.92 (+4.26%)"
+        },
+        {
+            "symbol": "SPOT",
+            "price": "Spotify Technology S.A.",
+            "change": "",
+            "percent_change": "572.39 +23.22 (+4.23%)"
+        },
+        {
+            "symbol": "FIBK",
+            "price": "First Interstate BancSystem, Inc.",
+            "change": "",
+            "percent_change": "25.79 +1.04 (+4.20%)"
         }
     ],
     "losers": [

@@ -1,30 +1,19 @@
-from fastapi import FastAPI
-from data.top_movers import get_losers_gainers
-from data.scheduler import scheduler
-import os
-import json
+# main.py
+from fastapi import FastAPI, Depends
+from sqlalchemy.orm import Session
+from data.database import get_session
+from data.models import TopGainer, TopLoser
 
 app = FastAPI()
 
-@app.on_event("startup")
-def start_scheduler():
-    print("[INFO] Starting scheduler...")
-    scheduler.start()
-
 @app.get("/")
-def read_root():
-    return {"Welcome": "to the app!"}
+def root():
+    return {"message": "Stock API is live 🔥"}
 
-@app.get("/top_movers")
-def get_top_movers():
-    output_file = os.path.join("data", "top_movers.json")
-    if not os.path.exists(output_file):
-        return {"error": "Data file not found. Please run the data fetching script."}
-    with open(output_file, 'r') as f:
-        data = json.load(f)
-    return data
+@app.get("/top-gainers")
+def get_top_gainers(db: Session = Depends(get_session)):
+    return db.query(TopGainer).all()
 
-@app.get("/fetch_top_movers")
-def fetch_top_movers():
-    data = get_losers_gainers()
-    return {"message": "Top movers data fetched successfully.", "data": data}
+@app.get("/top-losers")
+def get_top_losers(db: Session = Depends(get_session)):
+    return db.query(TopLoser).all()
