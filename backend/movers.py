@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import os
-from data.database import SessionLocal, Base, get_session
+from sqlalchemy.orm import Session
 from data.models import TopGainer, TopLoser
 
 headers = {
@@ -25,12 +25,13 @@ def top_gainers():
         data = []
         for row in rows:
             cols = row.find_all('td')
-            if len(cols) >= 4:
+            if len(cols) >= 5:  # Ensure at least the first 5 columns are present
                 data.append({
                     'symbol': cols[0].text.strip(),
-                    'price': cols[1].text.strip(),
-                    'change': cols[2].text.strip(),
-                    'percent_change': cols[3].text.strip()
+                    'name': cols[1].text.strip(),
+                    'price': cols[2].text.strip(),
+                    'change': cols[3].text.strip(),
+                    'percent_change': cols[4].text.strip()
                 })
 
         return data
@@ -51,12 +52,13 @@ def top_losers():
         data = []
         for row in rows:
             cols = row.find_all('td')
-            if len(cols) >= 4:
+            if len(cols) >= 10:  # Ensure at least the first 5 columns are present
                 data.append({
                     'symbol': cols[0].text.strip(),
-                    'price': cols[1].text.strip(),
-                    'change': cols[2].text.strip(),
-                    'percent_change': cols[3].text.strip()
+                    'name': cols[1].text.strip(),
+                    'price': cols[2].text.strip(),
+                    'change': cols[4].text.strip(),
+                    'percent_change': cols[5].text.strip()
                 })
 
         return data
@@ -65,69 +67,17 @@ def top_losers():
         print(f"[ERROR] Failed to fetch top losers data: {e}")
         return []
 
-def save_to_json(data):
-    # Make sure data directory exists
-    os.makedirs("data", exist_ok=True)
-
-    output_file = os.path.join("data", "top_movers.json")
-    try:
-        with open(output_file, 'w') as f:
-            json.dump(data, f, indent=4)
-        print(f"[INFO] Top movers data saved to {output_file}")
-    except Exception as e:
-        print(f"[ERROR] Failed to save JSON: {e}")
-
-def save_top_gainers(top_gainers):
-    from data.database import SessionLocal, Base, get_session
-    db = SessionLocal()
-    try:
-        for gainer_data in top_gainers:
-            gainer = TopGainer(
-                symbol=gainer_data['symbol'],
-                price=gainer_data['price'],
-                change=gainer_data['change'],
-                percent_change=gainer_data['percent_change']
-            )
-            db.add(gainer)
-        db.commit()
-    except Exception as e:
-        print(f"[ERROR] Failed to save top gainers to database: {e}")
-    finally:
-        db.close()
-
-def save_top_losers(top_losers):
-    from data.database import SessionLocal, Base, get_session
-
-    db = SessionLocal()
-    try:
-        for loser_data in top_losers:
-            loser = TopLoser(
-                symbol=loser_data['symbol'],
-                price=loser_data['price'],
-                change=loser_data['change'],
-                percent_change=loser_data['percent_change']
-            )
-            db.add(loser)
-        db.commit()
-    except Exception as e:
-        print(f"[ERROR] Failed to save top losers to database: {e}")
-    finally:
-        db.close()
-
-def main():
-    # Fetch data
+#export to json
+def export_top_gainers():
     gainers_data = top_gainers()
+    with open('top_gainers.json', 'w') as json_file:
+        json.dump(gainers_data, json_file)
+
+def export_top_losers():
     losers_data = top_losers()
-
-    # Save to database
-    save_top_gainers(gainers_data)
-    save_top_losers(losers_data)
-
-    # Optionally save to JSON
-    save_to_json({
-        "gainers": gainers_data,
-        "losers": losers_data
-    })
+    with open('top_losers.json', 'w') as json_file:
+        json.dump(losers_data, json_file)
 
 if __name__ == "__main__":
-    main()
+    export_top_gainers()
+    export_top_losers()
