@@ -1,28 +1,30 @@
-# main.py
-from fastapi import FastAPI
 from movers import top_gainers, top_losers
-import json
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import os
 
 app = FastAPI()
+origins = [
+    "http://localhost:3000",
+    "https://your-production-domain.com",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def root():
-    return {"message": "Stock API is live 🔥"}
+    return {"message": "Welcome to the Stock Movers API!"}
 
 @app.get("/top-gainers")
-# pull from export top_gainers
 def get_top_gainers():
-    gainers_data = top_gainers()
-    return gainers_data
-def store_top_gainers_to_json(gainers_data):
-    with open('top_gainers.json', 'w') as json_file:
-        json.dump(gainers_data, json_file)
+    return {"gainers": top_gainers()}
+
 
 @app.get("/top-losers")
 def get_top_losers():
-    losers_data = top_losers()
-    return losers_data
-def store_top_losers_to_json(losers_data):
-    with open('top_losers.json', 'w') as json_file:
-        json.dump(losers_data, json_file)
-    
+    return {"losers": top_losers()}
