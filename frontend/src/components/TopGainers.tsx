@@ -13,7 +13,7 @@ const TopGainers: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/top-gainers')
+    axios.get('http://127.0.0.1:8000/top-gainers')
       .then(response => {
         setGainers(response.data.gainers);
         setLoading(false);
