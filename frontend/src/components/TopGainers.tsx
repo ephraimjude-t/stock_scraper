@@ -1,30 +1,58 @@
-// src/components/GainersList.tsx
-import React from "react";
-import StockCard from "./StockCard";
-import { useStockData } from "./hooks/useStockData";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const GainersList: React.FC = () => {
-  const startEndpoint = "http://localhost:5000/api/start"; // Adjust as needed
-  const dataEndpoint = "http://localhost:5000/api/top_gainers";
-  const { stocks, loading, error } = useStockData(dataEndpoint, startEndpoint);
+interface Stock {
+  symbol: string;
+  price: string;
+  change: string;
+  percent_change: string;
+}
 
-  if (loading)
-    return <div className="text-center py-4">Loading Top Gainers…</div>;
-  if (error)
-    return (
-      <div className="text-center text-red-600 py-4">Error: {error}</div>
-    );
+const TopGainers: React.FC = () => {
+  const [gainers, setGainers] = useState<Stock[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/top-gainers')
+      .then(response => {
+        setGainers(response.data.gainers);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching gainers:', error);
+        setLoading(false);
+      });
+  }, []);
 
   return (
-    <div className="my-8">
-      <h2 className="text-2xl font-bold mb-4">Top Gainers</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {stocks.map((stock, idx) => (
-          <StockCard key={idx} stock={stock} />
-        ))}
-      </div>
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">Top Gainers</h2>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <table className="w-full text-sm text-left border border-gray-700">
+          <thead className="bg-gray-800 text-white">
+            <tr>
+              <th className="px-4 py-2">Symbol</th>
+              <th className="px-4 py-2">Company</th>
+              <th className="px-4 py-2">Change</th>
+              <th className="px-4 py-2">% Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            {gainers.map((stock, idx) => (
+              <tr key={idx} className="border-t border-gray-700">
+                <td className="px-4 py-2 font-semibold">{stock.symbol}</td>
+                <td className="px-4 py-2">{stock.price}</td>
+                <td className="px-4 py-2">{stock.percent_change.split(' ')[1]}</td>
+                <td className="px-4 py-2 text-green-500">{stock.percent_change.split(' ')[2]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
 
-export default GainersList;
+export default TopGainers;
