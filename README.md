@@ -23,10 +23,6 @@
 
 > ⚡ Note: This project does **NOT** use AI. It is purely a data scraper and display system.
 
----
-
-## 📸 Screenshots
-> _(Add screenshots inside a `/screenshots` folder later)_
 
 ---
 
