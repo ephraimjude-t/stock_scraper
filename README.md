@@ -10,8 +10,6 @@
 - FastAPI (Backend)
 - React (Frontend)
 - TailwindCSS
-- yFinance API
-- Axios (for API requests)
 
 ---
 
