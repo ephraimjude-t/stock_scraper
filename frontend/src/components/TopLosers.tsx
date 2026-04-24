@@ -35,8 +35,7 @@ const TopGainers: React.FC = () => {
             <tr>
               <th className="px-4 py-2">Symbol</th>
               <th className="px-4 py-2">Company</th>
-              <th className="px-4 py-2">Change</th>
-              <th className="px-4 py-2">% Change</th>
+              <th className="px-4 py-2">Change %</th>
             </tr>
           </thead>
           <tbody>
@@ -44,7 +43,6 @@ const TopGainers: React.FC = () => {
               <tr key={idx} className="border-t border-gray-700">
                 <td className="px-4 py-2 font-semibold">{stock.symbol}</td>
                 <td className="px-4 py-2">{stock.price}</td>
-                <td className="px-4 py-2">{stock.percent_change.split(' ')[1]}</td>
                 <td className="px-4 py-2 text-red-500">{stock.percent_change.split(' ')[2]}</td>
               </tr>
             ))}
