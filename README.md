@@ -19,7 +19,6 @@
 - React frontend fetches and displays the data
 - Clean, responsive UI with TailwindCSS
 
-> ⚡ Note: This project does **NOT** use AI. It is purely a data scraper and display system.
 
 
 ---
