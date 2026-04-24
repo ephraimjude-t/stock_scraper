@@ -44,11 +44,3 @@ def top_gainers():
 def top_losers():
     return fetch_movers("losers")
 
-
-# Test the functions
-if __name__ == "__main__":
-    print("Top Gainers:")
-    print(json.dumps(top_gainers(), indent=4))
-
-    print("\nTop Losers:")
-    print(json.dumps(top_losers(), indent=4))
