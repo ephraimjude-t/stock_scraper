@@ -5,15 +5,15 @@ import LosersList from "./components/TopLosers";
 
 function App() {
   return (
-    <div className="h-screen w-full bg-gradient-to-br from-[#0E0E10] via-[#1F2937] to-[#14B8A6] overflow-hidden">
+    <div className="h-screen w-full bg-[#0B0E11] overflow-hidden">
       <motion.div
-        className="bg-[#1F2937] opacity-50 w-[90vw] h-[40vh] rounded-[25px] relative items-center justify-center top-[5vh] left-[5vw] overflow-y-auto scrollbar-hide flex flex-col"
+        className="bg-[#151921] w-[90vw] h-[40vh] rounded-[25px] relative items-center justify-center top-[5vh] left-[5vw] overflow-y-auto scrollbar-hide flex flex-col"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
         <motion.div
-          className="text-white text-2xl font-bold text-center mt-4 relative top-[-18vh]"
+          className=" text-white text-2xl font-bold text-center mt-4 relative top-[-18vh]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
@@ -35,7 +35,7 @@ function App() {
 
       </motion.div>
       <motion.div
-        className="bg-[#1F2937] opacity-50 w-[90vw] h-[40vh] rounded-[25px] relative items-center justify-center top-[15vh] left-[5vw] overflow-y-auto scrollbar-hide flex flex-col"
+        className="bg-[#151921] opacity-50 w-[90vw] h-[40vh] rounded-[25px] relative items-center justify-center top-[15vh] left-[5vw] overflow-y-auto scrollbar-hide flex flex-col"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -64,15 +64,8 @@ function App() {
 
       </motion.div>
 
-   
-      
     </div>
 
-      
-        
-      
-      
   );
 }
-
 export default App;
